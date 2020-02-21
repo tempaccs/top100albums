@@ -1,0 +1,3 @@
+- name: tests
+  service: app
+  command: npm t
