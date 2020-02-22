@@ -13,7 +13,9 @@ const AlbumList = () => {
 
   return (
     <Centered>
-      {feed ? (
+      {!feed ? (
+        <Loading />
+      ) : (
         feed.entry.map((album, idx) => (
           <Album
             key={album.id.attributes["im:id"]}
@@ -21,8 +23,6 @@ const AlbumList = () => {
             album={album}
           />
         ))
-      ) : (
-        <Loading />
       )}
     </Centered>
   );
