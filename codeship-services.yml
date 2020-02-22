@@ -1,11 +1,15 @@
-app:
+web:
   build: .
 
 cypress:
   build:
+    context: .
     dockerfile: cypress/Dockerfile
   depends_on:
-  - app
+  - web
+  environment:
+    - CYPRESS_baseUrl=http://web
+  
 
 dockercfg-generator:
   image: codeship/aws-ecr-dockercfg-generator
