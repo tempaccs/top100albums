@@ -1,6 +1,10 @@
 describe("Smoke test", function() {
-  it("App should render", function() {
+  it("App should render both pages", function() {
     cy.visit("/");
-    cy.findByText(/learn react/i).should("exist");
+    cy.findByText("AlbumList").should("exist");
+
+    cy.findByText("Detail").click();
+
+    cy.findByText("AlbumDetail").should("exist");
   });
 });

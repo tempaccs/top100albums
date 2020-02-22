@@ -1,9 +1,14 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("renders album list and detail page", () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const albumList = getByText(/AlbumList/i);
+  expect(albumList).toBeInTheDocument();
+
+  const detailLink = getByText("Detail");
+  fireEvent.click(detailLink);
+  const albumDDetails = getByText("AlbumDetail");
+  expect(albumDDetails).toBeInTheDocument();
 });
