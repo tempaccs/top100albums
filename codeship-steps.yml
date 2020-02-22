@@ -1,12 +1,15 @@
 - name: Quality Control
   type: parallel
   steps:
-  - name: tests
-    service: app
-    command: npm t
-  - name: linting
-    service: app
-    command: npm run lint
+  # - name: tests
+  #   service: app
+  #   command: npm t
+  # - name: linting
+  #   service: app
+  #   command: npm run lint
+  - name: E2E tests
+    service: cypress
+    command: npm run test:e2e
 - name: Deployment
   tag: master
   type: serial
@@ -16,7 +19,7 @@
     type: push
     image_name: 097786803906.dkr.ecr.eu-west-1.amazonaws.com/top100albums
     registry: https://097786803906.dkr.ecr.eu-west-1.amazonaws.com
-    dockercfg_service: dockercfg_generator
+    dockercfg_service: dockercfg-generator
   - name: Deploy to ECS
     service: awsdeployment
     command: bash /deploy/deploy_image_to_ecs.sh

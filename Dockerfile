@@ -1,4 +1,5 @@
-FROM node:12.16.1-alpine
+# TODO multi-step build for smaller docker image
+FROM node:12.16.1
 
 ENV PORT=80
 
