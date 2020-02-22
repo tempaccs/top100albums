@@ -1,7 +1,17 @@
-app:
+web:
   build: .
 
-dockercfg_generator:
+cypress:
+  build:
+    context: .
+    dockerfile: cypress/Dockerfile
+  depends_on:
+  - web
+  environment:
+    - CYPRESS_baseUrl=http://web
+  
+
+dockercfg-generator:
   image: codeship/aws-ecr-dockercfg-generator
   add_docker: true
   encrypted_env_file:
