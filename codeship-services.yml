@@ -6,3 +6,14 @@ dockercfg_generator:
   add_docker: true
   encrypted_env_file:
     - aws.env.encrypted
+  environment:
+    - AWS_REGION=eu-west-1
+
+awsdeployment:
+  image: codeship/aws-deployment
+  encrypted_env_file:
+    - aws.env.encrypted
+  environment:
+    - AWS_DEFAULT_REGION=eu-west-1
+  volumes:
+    - ./:/deploy

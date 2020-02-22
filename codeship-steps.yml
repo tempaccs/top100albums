@@ -7,10 +7,16 @@
   - name: linting
     service: app
     command: npm run lint
-- name: Push To ECR
+- name: Deployment
   tag: master
-  service: app
-  type: push
-  image_name: 097786803906.dkr.ecr.eu-west-1.amazonaws.com/top100albums
-  registry: https://097786803906.dkr.ecr.eu-west-1.amazonaws.com
-  dockercfg_service: dockercfg_generator
+  type: serial
+  steps:
+  - name: Push To ECR
+    service: app
+    type: push
+    image_name: 097786803906.dkr.ecr.eu-west-1.amazonaws.com/top100albums
+    registry: https://097786803906.dkr.ecr.eu-west-1.amazonaws.com
+    dockercfg_service: dockercfg_generator
+  - name: Deploy to ECS
+    service: awsdeployment
+    command: bash /deploy/deploy_image_to_ecs.sh
