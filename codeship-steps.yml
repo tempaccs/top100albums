@@ -3,7 +3,7 @@
   steps:
   - name: tests
     service: web
-    command: npm t
+    command: npm run test:coverage
   - name: linting
     service: web
     command: npm run lint
