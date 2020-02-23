@@ -15,6 +15,7 @@ export type Album = {
       "im:id": string;
     };
   };
+  "im:artist": { label: string };
 };
 
 export type Feed = {

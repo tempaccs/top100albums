@@ -9,18 +9,34 @@ type Props = {
   dark: boolean;
 };
 
+const AlbumPadding = styled.div({
+  paddingTop: "36px",
+  paddingBottom: "36px"
+});
+
 const Background = styled.div(props => ({
   backgroundColor: props.color,
-  width: "100%"
+  width: "100%",
+  paddingLeft: "16ox"
 }));
+
+const AlbumTitle = styled.div({
+  textAlign: "center",
+  paddingBottom: "36px"
+});
 
 const Album = ({ album, dark }: Props) => {
   return (
-    <Background color={dark ? COLOR.GREY : COLOR.LIGHT_GREY}>
-      <Centered>
-        <div>{album.title.label}</div>
-        <img src={album["im:image"][2].label} alt={album.title.label} />
-      </Centered>
+    <Background
+      data-testid="AlbumList-Album"
+      color={dark ? COLOR.GREY : COLOR.LIGHT_GREY}
+    >
+      <AlbumPadding>
+        <Centered>
+          <AlbumTitle>{album.title.label}</AlbumTitle>
+          <img src={album["im:image"][2].label} alt={album.title.label} />
+        </Centered>
+      </AlbumPadding>
     </Background>
   );
 };
