@@ -69,5 +69,10 @@
   "lint-staged": {
     "*.{js,css,md,ts,tsx}": "prettier --write",
     "*.{js,ts,tsx}": "eslint --cache --fix"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns" : [
+      "<rootDir>/src/serviceWorker.ts" 
+    ]
   }
 }
