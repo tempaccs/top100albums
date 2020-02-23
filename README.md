@@ -2,6 +2,8 @@
 
 # Top100Albums
 
+[Demo](EC2Co-EcsEl-1TZBPM7YBSC8P-273447432.eu-west-1.elb.amazonaws.com)
+
 ## Run
 
 ```bash
@@ -27,4 +29,4 @@ npm run test:e2e
 
 ### Continous Delivery
 
-When a PR is created, the CI builds the docker image and runs linting, unit and E2E tests against it. Once it's merged, the CI builds a fresh docker image, runs again the quality control measures, and deploys the image to AWS (ECR). There AWS (ECS) runs the image. It can be accessed via EC2Co-EcsEl-1TZBPM7YBSC8P-273447432.eu-west-1.elb.amazonaws.com.
+When a PR is created, the CI builds the docker image and runs linting, unit and E2E tests against it. Once it's merged, the CI builds a fresh docker image, runs again the quality control measures, and deploys the image to AWS (ECR). There AWS (ECS) runs the image. It can be accessed [here](http://EC2Co-EcsEl-1TZBPM7YBSC8P-273447432.eu-west-1.elb.amazonaws.com).
