@@ -12,7 +12,7 @@ const SpinningNote = styled.img({
   height: "40vmin",
   pointerEvents: "none",
   "@media (prefers-reduced-motion: no-preference)": {
-    animation: `${spinAnimation} infinite 1s linear;`
+    animation: `${spinAnimation} infinite 0.5s linear;`
   }
 });
 

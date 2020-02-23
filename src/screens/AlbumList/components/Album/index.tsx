@@ -3,6 +3,7 @@ import { Album as AlbumType } from "data/albums/api"; // eslint-disable-line no-
 import styled from "@emotion/styled";
 import Centered from "components/Centered";
 import { COLOR } from "variables";
+import { Link } from "react-router-dom";
 
 type Props = {
   album: AlbumType;
@@ -33,7 +34,9 @@ const Album = ({ album, dark }: Props) => {
     >
       <AlbumPadding>
         <Centered>
-          <AlbumTitle>{album.title.label}</AlbumTitle>
+          <Link to={`/detail/${album.id.attributes["im:id"]}`}>
+            <AlbumTitle>{album.title.label}</AlbumTitle>
+          </Link>
           <img src={album["im:image"][2].label} alt={album.title.label} />
         </Centered>
       </AlbumPadding>
