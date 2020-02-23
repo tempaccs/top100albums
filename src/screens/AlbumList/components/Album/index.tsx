@@ -27,7 +27,10 @@ const AlbumTitle = styled.div({
 
 const Album = ({ album, dark }: Props) => {
   return (
-    <Background color={dark ? COLOR.GREY : COLOR.LIGHT_GREY}>
+    <Background
+      data-testid="AlbumList-Album"
+      color={dark ? COLOR.GREY : COLOR.LIGHT_GREY}
+    >
       <AlbumPadding>
         <Centered>
           <AlbumTitle>{album.title.label}</AlbumTitle>
