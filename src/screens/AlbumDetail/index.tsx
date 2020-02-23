@@ -81,7 +81,6 @@ const AlbumDescriptionSection = styled.div({
 const AlbumDetail = ({ feed }: Props) => {
   let { id } = useParams();
   const album = feed.entry.find(album => album.id.attributes["im:id"] === id);
-  console.log(album);
   return !album ? (
     <Redirect to="/" />
   ) : (
