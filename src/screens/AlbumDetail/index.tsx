@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "@emotion/styled";
-import { COLOR } from "variables";
+import { COLOR, MEDIA_QUERY } from "variables";
 import { Feed, Album } from "data/albums/api"; // eslint-disable-line no-unused-vars
 import { Redirect } from "react-router-dom";
 import { getAlbumDescription } from "data/albums/api";
+import Centered from "components/Centered";
 
 const Background = styled.div({
   position: "fixed",
@@ -17,7 +18,8 @@ const Background = styled.div({
 });
 
 const Content = styled.div({
-  padding: "8px"
+  padding: "8px",
+  maxWidth: "1024px"
 });
 
 type Props = {
@@ -37,11 +39,17 @@ const AlbumTitle = styled.div({
   textOverflow: "ellipsis"
 });
 
+const YoutubeIframe = styled.iframe({
+  width: "100%",
+  [MEDIA_QUERY.MEDIUM]: {
+    height: "580px"
+  }
+});
+
 const Youtube = ({ title }: { title: string }) => (
-  <iframe
+  <YoutubeIframe
     title={title}
     src={`http://www.youtube.com/embed?listType=search;list=${title}`}
-    width="100%"
   />
 );
 
@@ -73,46 +81,47 @@ const AlbumDescriptionSection = styled.div({
 const AlbumDetail = ({ feed }: Props) => {
   let { id } = useParams();
   const album = feed.entry.find(album => album.id.attributes["im:id"] === id);
-  console.log(album);
   return !album ? (
     <Redirect to="/" />
   ) : (
     <Background>
-      <Content>
-        <Title>{album.title.label}</Title>
-        <Youtube title={album.title.label} />
-        <GeneralInfo>
-          <GeneralInfoRightSide>
-            <AlbumTitle>{album["im:name"].label}</AlbumTitle>
-            <div>
-              <small>{album["im:artist"].label}</small>
-            </div>
-            <div>
-              <small>{album.category.attributes.label}</small>
-            </div>
-            <div>
-              <small>
-                <time dateTime={`${album["im:releaseDate"].label}`}>
-                  {album["im:releaseDate"].attributes.label}
-                </time>
-              </small>
-            </div>
-          </GeneralInfoRightSide>
-          <small>
-            <a
-              target="_blank"
-              type={album.link.attributes.type}
-              rel="noopener noreferrer"
-              href={album.link.attributes.href}
-            >
-              buy for {album["im:price"].label}
-            </a>
-          </small>
-        </GeneralInfo>
-        <AlbumDescriptionSection>
-          <AlbumDescription album={album} />
-        </AlbumDescriptionSection>
-      </Content>
+      <Centered>
+        <Content>
+          <Title>{album.title.label}</Title>
+          <Youtube title={album.title.label} />
+          <GeneralInfo>
+            <GeneralInfoRightSide>
+              <AlbumTitle>{album["im:name"].label}</AlbumTitle>
+              <div>
+                <small>{album["im:artist"].label}</small>
+              </div>
+              <div>
+                <small>{album.category.attributes.label}</small>
+              </div>
+              <div>
+                <small>
+                  <time dateTime={`${album["im:releaseDate"].label}`}>
+                    {album["im:releaseDate"].attributes.label}
+                  </time>
+                </small>
+              </div>
+            </GeneralInfoRightSide>
+            <small>
+              <a
+                target="_blank"
+                type={album.link.attributes.type}
+                rel="noopener noreferrer"
+                href={album.link.attributes.href}
+              >
+                buy for {album["im:price"].label}
+              </a>
+            </small>
+          </GeneralInfo>
+          <AlbumDescriptionSection>
+            <AlbumDescription album={album} />
+          </AlbumDescriptionSection>
+        </Content>
+      </Centered>
     </Background>
   );
 };

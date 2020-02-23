@@ -2,7 +2,7 @@ import React from "react";
 import { Album as AlbumType } from "data/albums/api"; // eslint-disable-line no-unused-vars
 import styled from "@emotion/styled";
 import Centered from "components/Centered";
-import { COLOR } from "variables";
+import { COLOR, MEDIA_QUERY } from "variables";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -18,12 +18,26 @@ const AlbumPadding = styled.div({
 const Background = styled.div(props => ({
   backgroundColor: props.color,
   width: "100%",
-  paddingLeft: "16ox"
+  paddingLeft: "16ox",
+  [MEDIA_QUERY.MEDIUM]: {
+    flexGrow: 1,
+    width: "300px",
+    height: "350px"
+  }
 }));
 
 const AlbumTitle = styled.div({
   textAlign: "center",
   paddingBottom: "36px"
+});
+
+const AlbumCover = styled.img({
+  [MEDIA_QUERY.MEDIUM]: {
+    transition: "transform .5s ease",
+    ":hover": {
+      transform: "scale(1.5)"
+    }
+  }
 });
 
 const Album = ({ album, dark }: Props) => {
@@ -37,7 +51,10 @@ const Album = ({ album, dark }: Props) => {
           <Link to={`/detail/${album.id.attributes["im:id"]}`}>
             <AlbumTitle>{album.title.label}</AlbumTitle>
           </Link>
-          <img src={album["im:image"][2].label} alt={album.title.label} />
+          <AlbumCover
+            src={album["im:image"][2].label}
+            alt={album.title.label}
+          />
         </Centered>
       </AlbumPadding>
     </Background>

@@ -3,6 +3,16 @@ import Album from "./components/Album";
 import SearchBar from "./components/SearchBar";
 import Centered from "components/Centered";
 import { Feed } from "data/albums/api"; // eslint-disable-line no-unused-vars
+import styled from "@emotion/styled";
+import { MEDIA_QUERY } from "variables";
+
+const Content = styled(Centered)({
+  flexDirection: "column",
+  [MEDIA_QUERY.MEDIUM]: {
+    flexDirection: "row",
+    flexWrap: "wrap"
+  }
+});
 
 type Props = {
   feed: Feed;
@@ -14,7 +24,7 @@ const AlbumList = ({ feed }: Props) => {
   return (
     <>
       <SearchBar value={searchValue} onChange={val => setSearchValue(val)} />
-      <Centered>
+      <Content>
         {feed.entry
           .filter(album => {
             if (!searchValue) return true;
@@ -29,7 +39,7 @@ const AlbumList = ({ feed }: Props) => {
               album={album}
             />
           ))}
-      </Centered>
+      </Content>
     </>
   );
 };

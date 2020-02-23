@@ -6,3 +6,8 @@ export enum COLOR {
   PURPLE = "#564256",
   ORANGE = "#FC814A"
 }
+
+export enum MEDIA_QUERY {
+  SMALL = "@media (min-width: 0px)",
+  MEDIUM = "@media (min-width: 768px)"
+}
